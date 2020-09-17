@@ -1,4 +1,6 @@
 import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {textInputBinder} from 'interacto';
+import {UpdateCode} from '../../command/update-code';
 import {HttpClient} from '@angular/common/http';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
 import {NestedTreeControl} from '@angular/cdk/tree';
@@ -63,5 +65,10 @@ export class AstComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    textInputBinder()
+      .on(this.code.nativeElement)
+      .toProduce(() => new UpdateCode(this.http, this.dataSource))
+      .then((c, i) => c.code = i.getWidget().value)
+      .bind();
   }
 }
