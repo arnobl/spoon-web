@@ -32,7 +32,7 @@ public class SpoonASTImpl implements SpoonAST {
 
 	public SpoonASTImpl(final String label, final String tooltip, final int startPosition, final int endPosition) {
 		super();
-		this.label = label.toString();
+		this.label = label;
 		this.tooltip = tooltip;
 		this.startPosition = startPosition;
 		this.endPosition = endPosition;
@@ -83,7 +83,7 @@ public class SpoonASTImpl implements SpoonAST {
 
 	@Override
 	public @NotNull Optional<SpoonAST> getParent() {
-		return Optional.empty();
+		return parent;
 	}
 
 	@Override
