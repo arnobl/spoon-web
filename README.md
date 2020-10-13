@@ -49,7 +49,7 @@ Optional:
 Mandatory:
 - front-end unit test (need to mock the back-end and its REST API, HTTP interceptor)
 - system test (E2E testing) using [Protractor](https://www.protractortest.org).
-- code convention and linters (eslint)
+- code convention and linters (`tslint`, already installed but can be customised)
 - code coverage (fail if < x %)
 
 

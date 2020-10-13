@@ -128,7 +128,7 @@ foo.foo.and.callFake(() => "foo");
 
 We will write tests for the class `command/update-code` (an undoable command).
 
-**Look at the code of the class `update-code to determine its job.**
+**Look at the code of the class `update-code` to determine its job.**
 
 **Remove the unique test from its test file and write one that checks that when the command is executed the REST route is used as expected and `dataSource.data` is set correctly.**
 
