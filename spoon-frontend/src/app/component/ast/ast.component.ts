@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
-import {textInputBinder} from 'interacto';
 import {UpdateCode} from '../../command/update-code';
 import {HttpClient} from '@angular/common/http';
-import {MatTreeNestedDataSource} from '@angular/material/tree';
+import {MatTree, MatTreeNestedDataSource} from '@angular/material/tree';
 import {NestedTreeControl} from '@angular/cdk/tree';
+import {textInputBinder} from 'interacto';
 
 export interface ASTNode {
   label: string;
@@ -46,10 +46,10 @@ const testData: ASTNode[] = [
 })
 export class AstComponent implements AfterViewInit {
   @ViewChild('code')
-  private code: ElementRef;
+  private code: ElementRef<HTMLTextAreaElement>;
 
   @ViewChild('tree')
-  private tree: ElementRef;
+  private tree: ElementRef<MatTree<any>>;
 
   readonly treeControl: NestedTreeControl<ASTNode>;
 
@@ -61,11 +61,11 @@ export class AstComponent implements AfterViewInit {
   constructor(private http: HttpClient) {
     this.treeControl = new NestedTreeControl<ASTNode>(node => node.children);
     this.dataSource = new MatTreeNestedDataSource();
-    this.dataSource.data = testData;
+    // this.dataSource.data = testData;
   }
 
   ngAfterViewInit(): void {
-    textInputBinder()
+    textInputBinder(2)
       .on(this.code.nativeElement)
       .toProduce(() => new UpdateCode(this.http, this.dataSource))
       .then((c, i) => c.code = i.getWidget().value)
