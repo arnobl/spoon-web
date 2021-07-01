@@ -3,7 +3,7 @@ import {UpdateCode} from '../../command/update-code';
 import {HttpClient} from '@angular/common/http';
 import {MatTree, MatTreeNestedDataSource} from '@angular/material/tree';
 import {NestedTreeControl} from '@angular/cdk/tree';
-import {textInputBinder} from 'interacto';
+import {BindingsContext, PartialTextInputBinder} from 'interacto';
 
 export interface ASTNode {
   label: string;
@@ -45,9 +45,6 @@ const testData: ASTNode[] = [
   styleUrls: ['./ast.component.css']
 })
 export class AstComponent implements AfterViewInit {
-  @ViewChild('code')
-  private code: ElementRef<HTMLTextAreaElement>;
-
   @ViewChild('tree')
   private tree: ElementRef<MatTree<any>>;
 
@@ -58,17 +55,21 @@ export class AstComponent implements AfterViewInit {
   hasChild = (_: number, node: ASTNode) => node.children !== undefined && node.children.length > 0;
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private bindings: BindingsContext) {
     this.treeControl = new NestedTreeControl<ASTNode>(node => node.children);
     this.dataSource = new MatTreeNestedDataSource();
     // this.dataSource.data = testData;
   }
 
-  ngAfterViewInit(): void {
-    textInputBinder(2)
-      .on(this.code.nativeElement)
+  configureCodeChange(binding: PartialTextInputBinder): void {
+    binding
       .toProduce(() => new UpdateCode(this.http, this.dataSource))
-      .then((c, i) => c.code = i.getWidget().value)
+      .then((c, i) => {
+        c.code = i.widget.value;
+      })
       .bind();
+  }
+
+  ngAfterViewInit(): void {
   }
 }
