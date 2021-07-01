@@ -1,6 +1,5 @@
 package spoon.resource;
 
-import io.swagger.annotations.Api;
 import java.util.Optional;
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
@@ -15,7 +14,6 @@ import spoon.ast.builder.SpoonTreeCmdBase;
 
 @Singleton
 @Path("spoon")
-@Api(value = "spoon")
 public class SpoonResource {
 	public SpoonResource() {
 		super();

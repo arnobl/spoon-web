@@ -26,14 +26,11 @@ public final class Main {
 	 */
 	public static HttpServer startServer() {
 		final ResourceConfig rc = new ResourceConfig(SpoonResource.class)
-			.register(MoxyJsonFeature.class)
-			.register(io.swagger.jaxrs.listing.ApiListingResource.class)
-			.register(io.swagger.jaxrs.listing.SwaggerSerializers.class);
+			.register(MoxyJsonFeature.class);
 
 		return GrizzlyHttpServerFactory.createHttpServer(URI.create(HTTP_ADDRESS), rc);
 	}
 
-	// http://localhost:4444/swag/index.html
 	// curl -X POST "http://localhost:4444/spoon/ast" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{  \"code\": \"class Foo {}\",  \"level\": \"a\"}"
 	public static void main(final String[] args) throws IOException {
 		final HttpServer server = startServer();
