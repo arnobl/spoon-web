@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
-import {UpdateCode} from '../../command/update-code';
-import {HttpClient} from '@angular/common/http';
+import {Bindings, PartialTextInputBinder} from 'interacto';
 import {MatTree, MatTreeNestedDataSource} from '@angular/material/tree';
 import {NestedTreeControl} from '@angular/cdk/tree';
-import {BindingsContext, PartialTextInputBinder} from 'interacto';
+import {HttpClient} from '@angular/common/http';
+import {UpdateCode} from '../../command/update-code';
 
 export interface ASTNode {
   label: string;
@@ -55,7 +55,7 @@ export class AstComponent implements AfterViewInit {
   hasChild = (_: number, node: ASTNode) => node.children !== undefined && node.children.length > 0;
 
 
-  constructor(private http: HttpClient, private bindings: BindingsContext) {
+  constructor(private http: HttpClient, public bindings: Bindings) {
     this.treeControl = new NestedTreeControl<ASTNode>(node => node.children);
     this.dataSource = new MatTreeNestedDataSource();
     // this.dataSource.data = testData;
