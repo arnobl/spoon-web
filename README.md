@@ -80,6 +80,10 @@ Mandatory:
 - Continuous delivery: on each build success, the docker images are put on the gitlab INSA Docker instance registry
 - Continuous delivery: on each build success, the docker images are deployed on servers
 
+We will try to have a Kubernetes instance at INSA on which you can plug your gitlab-ci.
+In case of problems, you can deploy locally using https://microk8s.io/ or Minikube
+
+
 Challenges:
 - continuous service: how not to lose context? This may require to modify the back.
 - shadow deployment: https://stackoverflow.com/questions/14599016/shadow-deployment-for-test-in-production
